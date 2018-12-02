@@ -17,13 +17,12 @@ Execute the client on a computer with access to [Google Translator](https://tran
 ```bash
 bash client.sh
 ```
+Now you have an interactive shell using named pipe files, **YES** you can `cd` into directories.
 
 # Poc 
 [![CODE_IS_CHEAP_SHOW_ME_THE_DEMO](http://img.youtube.com/vi/02CFsE0k96E/0.jpg)](http://www.youtube.com/watch?v=02CFsE0k96E)
 
-# Know problems
+# Known issues 
  * Google translate does not forward POST data, so there's a limit on the amount of data that your server can receive, for example, you'll probably not being able to read a big file like `.bashrc`.
  * It's not a problem, but I just don't know if there's a rate limit on Google Translator
  * The client script works on Mac an Linux, but on Linux you need to install the `xmllint` which is on `libxml2-utils`
-
-
