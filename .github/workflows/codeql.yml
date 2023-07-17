@@ -84,4 +84,4 @@ jobs:
     
     - name: List sarif files
       run: |
-        ls -lah ../results/
+        cat ../results/${{matrix.language}}.sarif | jq
