@@ -35,6 +35,7 @@ class webServer(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return
 
+
 try:
     server = HTTPServer(("", serverPort), webServer)
     print("Server running on port: {}".format(serverPort))
